@@ -3,6 +3,7 @@
 GROWI から export したページの .json を .md に変換するツール。
 
 開発の参考にするページ : [GROWIでMarkdownファイルを一括エクスポートする #Python - Qiita](https://qiita.com/plumchang/items/ef078bdc9e6a18e3f2f4)
+ただし添付ファイルのエクスポートには未対応 (attachmemnts.json の構造が v5.1.0 と違う)
 
 ## 利用方法
 
@@ -15,8 +16,6 @@ GROWI から export したページの .json を .md に変換するツール。
 - MongoDB Page Collections
   - [x] Pages
   - [x] Revisions
-- MongoDB Other Collections
-  - [x] Attachments
 
 ### 2. zip を展開
 

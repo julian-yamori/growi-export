@@ -1,8 +1,8 @@
 # growi_export
 
-GROWI から export したページの JSON を Markdown に変換するツール。
+GROWI から export したページの JSON を Markdown に変換するツールの Rust 実装。
 
-開発の参考にするページ : [GROWIでMarkdownファイルを一括エクスポートする #Python - Qiita](https://qiita.com/plumchang/items/ef078bdc9e6a18e3f2f4)
+開発の参考にしたページ : [GROWIでMarkdownファイルを一括エクスポートする #Python - Qiita](https://qiita.com/plumchang/items/ef078bdc9e6a18e3f2f4)
 ただし添付ファイルのエクスポートには未対応 (attachmemnts.json の構造が v5.1.0 と違う)
 
 ## 利用方法

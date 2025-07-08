@@ -1,5 +1,6 @@
 use std::{
     collections::HashMap,
+    env,
     fmt::Display,
     fs::{self, File},
     io::{self, BufReader, Write},
@@ -7,6 +8,10 @@ use std::{
 };
 
 use serde::{Deserialize, de::DeserializeOwned};
+
+use crate::config::Config;
+
+mod config;
 
 #[derive(Deserialize)]
 struct Page {
@@ -70,13 +75,17 @@ fn page_output_path(output_dir: &Path, page: &Page) -> PathBuf {
 }
 
 fn main() -> anyhow::Result<()> {
-    let input_dir = PathBuf::from("./input");
-    let output_dir = PathBuf::from("./output");
+    // 引数から config.toml パスを取得
+    let mut cli_args = env::args();
+    cli_args.next(); // 先頭の実行ファイルパスを捨てる
+    let config_path = cli_args.next().unwrap_or_else(|| "config.toml".to_string());
+
+    let config = Config::load_toml(&config_path)?;
 
     // json を読み込む
-    let pages = read_json_file::<Vec<Page>>(&input_dir.join("pages.json"))?;
+    let pages = read_json_file::<Vec<Page>>(&config.input.join("pages.json"))?;
     // WARN : revisions.json を一気に全部読むのは重そう
-    let revisions = read_json_file::<Vec<Revision>>(&input_dir.join("revisions.json"))?;
+    let revisions = read_json_file::<Vec<Revision>>(&config.input.join("revisions.json"))?;
 
     // Revision を page_id で検索しやすくする
     let revisions_map = revisions
@@ -96,7 +105,7 @@ fn main() -> anyhow::Result<()> {
         };
 
         // ファイルパスを作成
-        let out_file_path = page_output_path(&output_dir, page);
+        let out_file_path = page_output_path(&config.output, page);
 
         if out_file_path.exists() {
             print_err(format!(

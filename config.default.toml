@@ -1,0 +1,5 @@
+input = "./input"
+output = "./output"
+
+[filter]
+root_page = "/projects/growi_export"

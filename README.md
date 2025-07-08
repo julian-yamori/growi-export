@@ -9,7 +9,11 @@ GROWI から export したページの JSON を Markdown に変換するツー�
 
 実行ファイルは未作成です。`cargo run` で実行してください。
 
-### 1. GROWI のデータをアーカイブ
+### 1. config.toml を用意
+
+`config.default.toml` を `config.toml` にリネームし、適宜設定してください。
+
+### 2. GROWI のデータをアーカイブ
 
 [データのアーカイブ | GROWI Docs](https://docs.growi.org/ja/admin-guide/management-cookbook/export.html)
 
@@ -19,20 +23,25 @@ GROWI から export したページの JSON を Markdown に変換するツー�
   - [x] Pages
   - [x] Revisions
 
-### 2. zip を展開
+### 3. zip を展開
 
-### 3. ファイルの配置
+### 4. ファイルの配置
 
-展開した zip 内の `pages.json` と `revisions.json` を `./input` ディレクトリ内に配置してください。
+展開した zip 内の `pages.json` と `revisions.json` を config.toml の `input` に指定したディレクトリ内に配置してください。
 
-Markdorn ファイルは `./output` ディレクトリに生成されます (空にしておいてください)。
+Markdorn ファイルは、config.toml の `output` に指定したディレクトリに生成されます。
+※空にしておいてください。
 
-### 4. プログラムを実行
+### 5. プログラムを実行
 
 以下のコマンドで、JSON ファイルを元に Markdown ファイルが生成されます。
 
 ```bash
 cargo run
+# ./config.toml の設定で実行されます。
+
+# もしくは、config.toml のパスを引数で指定できます。
+cargo run ./config.toml
 ```
 
 ## DevContainer の設定手順

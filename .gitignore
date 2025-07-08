@@ -1,3 +1,6 @@
 /target
+
+# cargo run での動作確認用
 /input
 /output
+config.toml

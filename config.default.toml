@@ -1,5 +1,9 @@
+# 読み込み元の json が格納されたディレクトリのパス
 input = "./input"
+
+# MarkDown の出力先ディレクトリのパス
 output = "./output"
 
 [filter]
-root_page = "/projects/growi_export"
+# 出力するページをパスで絞り込む
+# path = "/projects/growi_export"

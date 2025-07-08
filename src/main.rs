@@ -12,7 +12,7 @@ use serde::{Deserialize, de::DeserializeOwned};
 use crate::config::Config;
 
 mod config;
-mod page_filter;
+mod path_filter;
 
 #[derive(Deserialize)]
 struct Page {
@@ -94,7 +94,7 @@ fn main() -> anyhow::Result<()> {
         .map(|r| (r.page_id.clone(), r))
         .collect::<HashMap<String, Revision>>();
 
-    let page_filter = config.filter.as_ref().and_then(|f| f.root_page.as_ref());
+    let page_filter = config.filter.as_ref().and_then(|f| f.path.as_ref());
 
     for page in &pages {
         if page.is_empty {

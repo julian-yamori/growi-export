@@ -5,7 +5,7 @@ use std::{
 
 use serde::Deserialize;
 
-use crate::page_filter::PageFilter;
+use crate::path_filter::PathFilter;
 
 /// config.toml から読み込む設定
 #[derive(Debug, PartialEq, Eq, Deserialize)]
@@ -32,5 +32,5 @@ impl Config {
 #[derive(Debug, PartialEq, Eq, Deserialize)]
 pub struct FilterConfig {
     /// ここに指定されたページの配下のみを出力する
-    pub root_page: Option<PageFilter>,
+    pub path: Option<PathFilter>,
 }

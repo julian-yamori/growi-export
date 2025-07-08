@@ -2,7 +2,7 @@ use serde::Deserialize;
 
 /// GROWI のページのパスを絞り込む設定
 #[derive(Debug, PartialEq, Eq)]
-pub struct PageFilter {
+pub struct PathFilter {
     /// `/Sandbox/Bootstrap4/` の形式の文字列 (末尾に `/` を付ける)
     parent_path: String,
 
@@ -10,7 +10,7 @@ pub struct PageFilter {
     len: usize,
 }
 
-impl PageFilter {
+impl PathFilter {
     /// 指定されたページが self のページに含まれるなら true
     pub fn contains(&self, path: &str) -> bool {
         if path.starts_with(&self.parent_path) {
@@ -23,7 +23,7 @@ impl PageFilter {
     }
 }
 
-impl From<String> for PageFilter {
+impl From<String> for PathFilter {
     fn from(mut value: String) -> Self {
         if !value.ends_with('/') {
             value.push('/');
@@ -36,7 +36,7 @@ impl From<String> for PageFilter {
     }
 }
 
-impl<'de> Deserialize<'de> for PageFilter {
+impl<'de> Deserialize<'de> for PathFilter {
     fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: serde::Deserializer<'de>,
@@ -49,11 +49,11 @@ impl<'de> Deserialize<'de> for PageFilter {
 mod tests {
     use super::*;
 
-    fn str_to_filter(s: &str) -> PageFilter {
+    fn str_to_filter(s: &str) -> PathFilter {
         s.to_string().into()
     }
 
-    // tests for GrowiPagePath::contains()
+    // tests for PathFilter::contains()
     mod test_contains {
         use super::*;
 
